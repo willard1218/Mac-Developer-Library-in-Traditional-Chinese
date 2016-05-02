@@ -5,7 +5,7 @@
 
 An MKMapView object provides an embeddable map interface, similar to the one provided by the Maps application. You use this class as-is to display map information and to manipulate the map contents from your application. You can center the map on a given coordinate, specify the size of the area you want to display, and annotate the map with custom information.
 
-一個 MKMapView 物件提供一個可被嵌入的地圖介面, 相似於一個地圖的應用程式. 你可使用這個類別來顯示地圖的資訊以及操作在你應用程式上地圖的內容. 你可以給定一個座標, 當作地圖的中心, 指定你要顯示的區域的大小, 然後使用自訂的資訊插入到地圖上當註解.
+一個 MKMapView 物件提供一個與地圖應用類似的可被嵌入的地圖介面. 你可使用這個類別來顯示地圖的資訊以及操作在你應用程式上地圖的內容. 你可以使地圖定位在一個給定一個座標, 指定你想要顯示地圖的範圍, 然後使用自訂的資訊插入到地圖上當註解.
 
 
 When you initialize a map view, you should specify the initial region for that map to display. You do this by setting the region property of the map. A region is defined by a center point and a horizontal and vertical distance, referred to as the span. The span defines how much of the map at the given point should be visible and is also how you set the zoom level. Specifying a large span results in the user seeing a wide geographical area and corresponds to a low zoom level. Specifying a small span results in the user seeing a more narrow geographical area and corresponds to a higher zoom level.
@@ -52,7 +52,7 @@ The presentation of annotation objects on the screen is handled by an annotation
 
 Because annotation views are needed only when they are onscreen, the MKMapView class provides a mechanism for queueing annotation views that are not in use. Annotation views with a reuse identifier can be detached and queued internally by the map view when they move offscreen. This feature improves memory use by keeping only a small number of annotation views in memory at once and by recycling the views you do have. It also improves scrolling performance by alleviating the need to create new views while the map is scrolling.
 
-因為 annotation view 只有當在螢幕上才被需要, 所以 MKMapView 類別提供一個機制, 用來查詢哪些 annotation view 還沒被使用. 當 annotation view 不在畫面上時, annotation view 有一個重複使用的識別值, 會被地圖畫面分離和內部排隊??, 這個特色是藉由只使用小數量的 annotation view 放在記憶體裡, 來改善記憶體的使用, 和重複利用你現有的 annotation view. 當地圖在捲動時, 藉由減少建立新的 view 來增強了捲動的效能.
+因為 annotation view 只有當在螢幕上時我們才需要, 所以 MKMapView 類別提供一個機制, 用來查詢哪些 annotation view 還沒被使用. 當 annotation view 不在畫面上時, annotation view 有一個重複使用的識別值, 會被地圖畫面分離和內部排隊??, 這個特色是藉由只使用小數量的 annotation view 放在記憶體裡, 來改善記憶體的使用, 和重複利用你現有的 annotation view. 當地圖在捲動時, 藉由減少建立新的 view 來增強了捲動的效能.
 
 When configuring your map interface, you should add all of your annotation objects right away. The map view uses the coordinate data in each annotation object to determine when the corresponding annotation view needs to appear onscreen. When an annotation moves onscreen, the map view asks its delegate to create a corresponding annotation view. If your application has different types of annotations, it can define different annotation view classes to represent each type.
 
