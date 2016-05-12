@@ -1,6 +1,6 @@
 #Event Handling Guide for iOS
 
-https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541-CH1-SW1
+[原文連結](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541-CH1-SW1)
 
 ##Introduction
 ###About Events in iOS
@@ -92,15 +92,15 @@ This document assumes that you are familiar with:
 
 這份文件假設你已經熟悉以下幾點
 
-1. The basic concepts of iOS app development
-2. The different aspects of creating your app’s user interface
-3. How views and view controllers work, and how to customize them
+- The basic concepts of iOS app development
+- The different aspects of creating your app’s user interface
+- How views and view controllers work, and how to customize them
 
----
 
-1. 基本的 iOS 應用程式開發
-2. 能夠使用不同的方式來建立你應用程式的使用者介面
-3. 知道 view 和 view controller 是如何運作以及要怎麼自定義他們
+
+- 基本的 iOS 應用程式開發
+- 能夠使用不同的方式來建立你應用程式的使用者介面
+- 知道 view 和 view controller 是如何運作以及要怎麼自定義他們
 
 If you are not familiar with those concepts, start by reading Start Developing iOS Apps (Swift). Then, be sure to read either View Programming Guide for iOS or View Controller Programming Guide for iOS, or both.
 
@@ -119,7 +119,65 @@ For advanced gesture recognizer techniques such as curve smoothing and applying 
 
 Many sample code projects in the iOS Reference Library have code that uses gesture recognizers and handles events. Among these are the following projects:
 
-Simple Gesture Recognizers is a perfect starting point for understanding gesture recognition. This app demonstrates how to recognize tap, swipe, and rotate gestures. The app responds to each gesture by displaying and animating an image at the touch location.
-Handling Touches Using Responder Methods and Gesture Recognizers includes two projects that demonstrate how to handle multiple touches to drag squares around onscreen. One version uses gesture recognizers, and the other uses custom touch-event handling methods. The latter version is especially useful for understanding touch phases because it displays the current touch phase onscreen as the touches occur.
-MoveMe shows how to animate a view in response to touch events. Examine this sample project to further your understanding of custom touch-event handling.
+在 iOS Reference Library 裡面有很多範例專案, 都有關於使用 gesture recognizer 和處理事件的程式碼. 包含以下專案：
+ 
+- Simple Gesture Recognizers is a perfect starting point for understanding gesture recognition. This app demonstrates how to recognize tap, swipe, and rotate gestures. The app responds to each gesture by displaying and animating an image at the touch location.
+- Handling Touches Using Responder Methods and Gesture Recognizers includes two projects that demonstrate how to handle multiple touches to drag squares around onscreen. One version uses gesture recognizers, and the other uses custom touch-event handling methods. The latter version is especially useful for understanding touch phases because it displays the current touch phase onscreen as the touches occur.
+- MoveMe shows how to animate a view in response to touch events. Examine this sample project to further your understanding of custom touch-event handling.
 
+##Gesture Recognizers
+
+Gesture recognizers convert low-level event handling code into higher-level actions. They are objects that you attach to a view, which allows the view to respond to actions the way a control does. Gesture recognizers interpret touches to determine whether they correspond to a specific gesture, such as a swipe, pinch, or rotation. If they recognize their assigned gesture, they send an action message to a target object. The target object is typically the view’s view controller, which responds to the gesture as shown in Figure 1-1. This design pattern is both powerful and simple; you can dynamically determine what actions a view responds to, and you can add gesture recognizers to a view without having to subclass the view.
+
+Gesture Recognizer 把低階事件處理的程式碼轉換成高階的動作. 他們可以加入到畫面裡, 這可以讓你的畫面回應控制做的方法??. 如果他們對應到特定的手勢, 例如像拖曳, 捏, 旋轉. Gesture recognizer 就會認出這些觸碰事件. 如果他們認得自己設定的姿勢, 他們會傳遞動作訊息給目標物件. 這些目標物件通常是畫面的 view controller, 就像圖 1-1. 這個設計模式強大又單純; 你可以動態的決定畫面要對哪些動作做反應, 也可以在不用繼承 view 的情況下. 把 gesture recognizer 加入到 view 裡面.
+
+
+###Use Gesture Recognizers to Simplify Event Handling
+
+The UIKit framework provides predefined gesture recognizers that detect common gestures. It’s best to use a predefined gesture recognizer when possible because their simplicity reduces the amount of code you have to write. In addition, using a standard gesture recognizer instead of writing your own ensures that your app behaves the way users expect.
+
+UIKit 框架提供了預定義的 gesture recognizer 來偵測常用的姿勢. 最好先使用預定義的 gesture recognizer, 因為他們的簡化了你原本要寫的程式碼. 另外, 使用標準的 gesture recognizer 而不是自定義的姿勢, 可以確保你的應用程式行為正是使用者所預期的.
+
+If you want your app to recognize a unique gesture, such as a checkmark or a swirly motion, you can create your own custom gesture recognizer. To learn how to design and implement your own gesture recognizer, see Creating a Custom Gesture Recognizer.
+
+如果你想要你的應用程式認得特別的手勢, 例如像打勾勾或者旋渦的動作, 你可以建立你自定義的 gesture recognizer. 要學習如何設計和實作你自定義的 gesture recognizer, 可以參考 Creating a Custom Gesture Recognizer.
+
+
+
+###Built-in Gesture Recognizers Recognize Common Gestures
+When designing your app, consider what gestures you want to enable. Then, for each gesture, determine whether one of the predefined gesture recognizers listed in Table 1-1 is sufficient.
+
+當設計應用程式時, 需要考慮要啟用哪些手勢. 然後對於每個姿勢, 決定好在表格 1-1 的預定義手勢是否足夠.
+
+| Gesture | UIKit class |
+| ------------- | ------------- |
+| Tapping (any number of taps) | UITapGestureRecognizer |
+| Pinching in and out (for zooming a view) | UIPinchGestureRecognizer |
+| Panning or dragging | UIPanGestureRecognizer |
+| Swiping (in any direction) | UISwipeGestureRecognizer |
+| Rotating (fingers moving in opposite directions) | UIRotationGestureRecognizer |
+| Long press (also known as “touch and hold”) | UILongPressGestureRecognizer |
+
+
+| 手勢 | UIKit 類別 |
+| ------------- | ------------- |
+| 輕碰 (任何次數的點擊) | UITapGestureRecognizer |
+| 捏放 (用來放到縮寫畫面) | UIPinchGestureRecognizer |
+| 拖曳 | UIPanGestureRecognizer |
+| 滑動 (任何方向) | UISwipeGestureRecognizer |
+| 旋轉 (兩根手指反方向移動) | UIRotationGestureRecognizer |
+| 長按 (就是觸碰加停留) | UILongPressGestureRecognizer |
+
+Your app should respond to gestures only in ways that users expect. For example, a pinch should zoom in and out whereas a tap should select something. For guidelines about how to properly use gestures, see Apps Respond to Gestures, Not Clicks.
+
+你的應用程式應該要依照使用者預期來回應這些手勢. 例如, 在如何正確的使用姿勢的教學裡, 當使用者捏時, 應該是執行縮放的動作, 而不是選擇某個東西, 應用程式不能解釋成為點的手勢.
+
+Note: In iOS 7 and later, expect users to swipe up from the bottom of the screen to reveal Control Center. If iOS determines that a touch that begins at the bottom of the screen should reveal Control Center, it doesn’t deliver the gesture to the currently running app. If iOS determines that the touch should not reveal Control Center, the touch may be slightly delayed before it reaches the app.
+
+注意: 在 iOS 7 或更新的版本, 當使用者從螢幕底部往上滑的時候, 期待出現控制中心. 如果 iOS 認為從螢幕底部往上滑會出現控制中心時, 就不會傳遞手勢給現在正在運作的應用程式, 如果 iOS 認為從螢幕底部往上滑不會出現控制中心時, 則這種觸碰會先延遲一點時間, 在傳遞給正在運行的應用程式.
+
+
+###Gesture Recognizers Are Attached to a View
+Every gesture recognizer is associated with one view. By contrast, a view can have multiple gesture recognizers, because a single view might respond to many different gestures. For a gesture recognizer to recognize touches that occur in a particular view, you must attach the gesture recognizer to that view. When a user touches that view, the gesture recognizer receives a message that a touch occurred before the view object does. As a result, the gesture recognizer can respond to touches on behalf of the view.
+
+每個 Gesture recognizer 都跟一個畫面有關係. 相反的, 一個畫面可以有很多 Gesture recognizer, 因為單一個畫面也許對很多不同的手勢做出反應. 
