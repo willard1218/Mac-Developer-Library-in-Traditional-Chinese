@@ -144,7 +144,7 @@ If you want your app to recognize a unique gesture, such as a checkmark or a swi
 
 
 
-###Built-in Gesture Recognizers Recognize Common Gestures
+####Built-in Gesture Recognizers Recognize Common Gestures
 When designing your app, consider what gestures you want to enable. Then, for each gesture, determine whether one of the predefined gesture recognizers listed in Table 1-1 is sufficient.
 
 當設計應用程式時, 需要考慮要啟用哪些手勢. 然後對於每個姿勢, 決定好在表格 1-1 的預定義手勢是否足夠.
@@ -159,14 +159,7 @@ When designing your app, consider what gestures you want to enable. Then, for ea
 | Long press (also known as “touch and hold”) | UILongPressGestureRecognizer |
 
 
-| 手勢 | UIKit 類別 |
-| ------------- | ------------- |
-| 輕碰 (任何次數的點擊) | UITapGestureRecognizer |
-| 捏放 (用來放到縮寫畫面) | UIPinchGestureRecognizer |
-| 拖曳 | UIPanGestureRecognizer |
-| 滑動 (任何方向) | UISwipeGestureRecognizer |
-| 旋轉 (兩根手指反方向移動) | UIRotationGestureRecognizer |
-| 長按 (就是觸碰加停留) | UILongPressGestureRecognizer |
+
 
 Your app should respond to gestures only in ways that users expect. For example, a pinch should zoom in and out whereas a tap should select something. For guidelines about how to properly use gestures, see Apps Respond to Gestures, Not Clicks.
 
@@ -177,7 +170,53 @@ Note: In iOS 7 and later, expect users to swipe up from the bottom of the screen
 注意: 在 iOS 7 或更新的版本, 當使用者從螢幕底部往上滑的時候, 期待出現控制中心. 如果 iOS 認為從螢幕底部往上滑會出現控制中心時, 就不會傳遞手勢給現在正在運作的應用程式, 如果 iOS 認為從螢幕底部往上滑不會出現控制中心時, 則這種觸碰會先延遲一點時間, 在傳遞給正在運行的應用程式.
 
 
-###Gesture Recognizers Are Attached to a View
+####Gesture Recognizers Are Attached to a View
 Every gesture recognizer is associated with one view. By contrast, a view can have multiple gesture recognizers, because a single view might respond to many different gestures. For a gesture recognizer to recognize touches that occur in a particular view, you must attach the gesture recognizer to that view. When a user touches that view, the gesture recognizer receives a message that a touch occurred before the view object does. As a result, the gesture recognizer can respond to touches on behalf of the view.
 
-每個 Gesture recognizer 都跟一個畫面有關係. 相反的, 一個畫面可以有很多 Gesture recognizer, 因為單一個畫面也許對很多不同的手勢做出反應. 
+每個 Gesture recognizer 都跟一個畫面有關連. 相反的, 一個畫面可以有很多 Gesture recognizer, 因為單一個畫面也許對很多不同的手勢做出反應. 為了讓 gesture recognizer 能在特定的畫面上認得觸碰手勢, 你必須要把 gesture recognizer 加在畫面上. 當使用者觸碰畫面時, gesture recognizer 就會比畫面更早收到訊息. 因此, gesturingture recognizer 可以代替畫面來回應觸碰的事件.
+
+
+####Gestures Trigger Action Messages
+When a gesture recognizer recognizes its specified gesture, it sends an action message to its target. To create a gesture recognizer, you initialize it with a target and an action.
+
+當 gesture recognizer 認得特定的手勢, 就會傳送動作訊息給目標物件. 所以要建立一個 gesture recognizer, 你需要使用 action 和 target 來做初始化.
+
+
+#####Discrete and Continuous Gestures
+
+Gestures are either discrete or continuous. A discrete gesture, such as a tap, occurs once. A continuous gesture, such as pinching, takes place over a period of time. For discrete gestures, a gesture recognizer sends its target a single action message. A gesture recognizer for continuous gestures keeps sending action messages to its target until the multitouch sequence ends, as shown in Figure 1-2.
+
+手勢可以分成離散或連續的. 一個離散的手勢, 例如像輕碰, 只會發生一次. 一個連續的手勢, 例如捏放, 要持續一段時間. 對於離散的手勢, gesture recognizer 會傳遞給目標物件一個動作訊息. 對於連續的手勢, gesture recognizer 會持續傳遞訊息給目標物件, 直到多指觸碰的續發事件停止.
+
+Figure 1-2  Discrete and continuous gestures
+
+![1-2](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Art/discrete_vs_continuous_2x.png)
+
+
+###Responding to Events with Gesture Recognizers
+
+There are three things you do to add a built-in gesture recognizer to your app:
+
+
+
+1. Create and configure a gesture recognizer instance. This step includes assigning a target, action, and sometimes assigning gesture-specific attributes (such as the numberOfTapsRequired).
+2. Attach the gesture recognizer to a view.
+3. Implement the action method that handles the gesture.
+
+
+1. 建立和設定 gesture recognizer 物件. 包含以下步驟 : 指定 target, action, 有時候要指定特定的手勢屬性, 例如 numberOfTapsRequired.
+2. 將 gesture recognizer 加到一個 view 上面.
+3. 實作處理手勢觸碰時, 要執行的 action 方法.
+
+
+####Using Interface Builder to Add a Gesture Recognizer to Your App
+Within Interface Builder in Xcode, add a gesture recognizer to your app the same way you add any object to your user interface—drag the gesture recognizer from the object library to a view. When you do this, the gesture recognizer automatically becomes attached to that view. You can check which view your gesture recognizer is attached to, and if necessary, change the connection in the nib file.
+
+在 Xcode 裡面的 Interface Builder, 
+
+After you create the gesture recognizer object, you need to create and connect an action method. This method is called whenever the connected gesture recognizer recognizes its gesture. If you need to reference the gesture recognizer outside of this action method, you should also create and connect an outlet for the gesture recognizer. Your code should look similar to Listing 1-1.
+
+
+
+
+
