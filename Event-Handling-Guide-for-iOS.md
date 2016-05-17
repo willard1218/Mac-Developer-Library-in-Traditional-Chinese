@@ -1,5 +1,5 @@
 #Event Handling Guide for iOS
-
+ 
 [原文連結](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541-CH1-SW1)
 
 ##Introduction
