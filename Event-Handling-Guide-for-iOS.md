@@ -129,7 +129,8 @@ Many sample code projects in the iOS Reference Library have code that uses gestu
 
 Gesture recognizers convert low-level event handling code into higher-level actions. They are objects that you attach to a view, which allows the view to respond to actions the way a control does. Gesture recognizers interpret touches to determine whether they correspond to a specific gesture, such as a swipe, pinch, or rotation. If they recognize their assigned gesture, they send an action message to a target object. The target object is typically the view’s view controller, which responds to the gesture as shown in Figure 1-1. This design pattern is both powerful and simple; you can dynamically determine what actions a view responds to, and you can add gesture recognizers to a view without having to subclass the view.
 
-Gesture Recognizer 把低階事件處理的程式碼轉換成高階的動作. 他們可以加入到畫面裡, 這可以讓你的畫面回應控制做的方法??. 如果他們對應到特定的手勢, 例如像拖曳, 捏, 旋轉. Gesture recognizer 就會認出這些觸碰事件. 如果他們認得自己設定的姿勢, 他們會傳遞動作訊息給目標物件. 這些目標物件通常是畫面的 view controller, 就像圖 1-1. 這個設計模式強大又單純; 你可以動態的決定畫面要對哪些動作做反應, 也可以在不用繼承 view 的情況下. 把 gesture recognizer 加入到 view 裡面.
+
+Gesture Recognizer (的作用是)把低階事件處理的程式碼轉換成高階的動作；將 gesture recognizers 附加到 view 之上，可以讓 view 如 control 一樣對 action 作出回應. 如果他們對應到特定的手勢, 例如像拖曳, 捏, 旋轉. Gesture recognizer 就會認出這些觸碰事件. 如果他們認得自己設定的姿勢, 他們會傳遞動作訊息給目標物件. 這些目標物件通常是畫面的 view controller, 就像圖 1-1. 這個設計模式強大又單純; 你可以動態的決定畫面要對哪些動作做反應, 也可以在不用繼承 view 的情況下. 把 gesture recognizer 加入到 view 裡面.
 
 
 ###Use Gesture Recognizers to Simplify Event Handling

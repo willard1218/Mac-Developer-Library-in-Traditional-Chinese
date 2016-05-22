@@ -65,3 +65,25 @@ Most controls in the AppKit framework have one or more cell objects associated w
 
 A few controls in the AppKit have multiple cells. For example, NSMatrix objects are controls that contain rows or matrices of cells of the same or different type. Each cell can have its own target and action selector. A few controls in AppKit store their target and action information themselves, and do not use a cell.
 
+
+在 AppKit 裡的一些 control 都有多個 cell. 例如 NSMatrix control 物件是一個包含很多列或各種一樣或不一樣的 cell 組成的矩陣. 每個 cell 都可以有自己的 target 和 action selector. 在 AppKit 裡的一些 control 裡面都存有自己的 traget 和 action 資訊, 不要使用 cell?
+
+
+Prerequisite Articles
+Selector
+Target-Action
+Related Articles
+Application object
+Definitive Discussion
+UIControl Class Reference
+Sample Code Projects
+UIKit Catalog (iOS): Creating and Customizing UIKit Controls
+
+
+
+
+##Coordinate system
+
+A coordinate system is a two-dimensional space in which you position, size, transform, and draw your application’s visible objects, and in which you locate user events. Applications in iOS and OS X rely on a coordinate system that locates points using horizontal and vertical axes (that is, an x-axis and a y-axis) that intersect at a common origin point (0.0, 0.0). From the origin, positive values increase in one direction along either axis; negative values increase in the opposite directions. You express a point in this coordinate space as a pair of floating-point numbers in user-space units, which are unpinned to any units in device space such as pixels. Drawing almost always occurs in the sector of a coordinate space where both x-axis and y-axis values are positive.
+
+一個座標系統是一個二維空間, 在這空間你可以定義位置, 大小, 轉換方式 以及在你的應用程式裡畫出可見的物件, 也可以設定使用者的事件. 在 iOS 和 OS X 裡的應用程式裡面使用座標系統裡的 x 軸和 y 軸(在一般的原點(0.0,0.0)相交)來定位點. 
