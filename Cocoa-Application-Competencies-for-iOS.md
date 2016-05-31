@@ -86,4 +86,28 @@ UIKit Catalog (iOS): Creating and Customizing UIKit Controls
 
 A coordinate system is a two-dimensional space in which you position, size, transform, and draw your application’s visible objects, and in which you locate user events. Applications in iOS and OS X rely on a coordinate system that locates points using horizontal and vertical axes (that is, an x-axis and a y-axis) that intersect at a common origin point (0.0, 0.0). From the origin, positive values increase in one direction along either axis; negative values increase in the opposite directions. You express a point in this coordinate space as a pair of floating-point numbers in user-space units, which are unpinned to any units in device space such as pixels. Drawing almost always occurs in the sector of a coordinate space where both x-axis and y-axis values are positive.
 
-一個座標系統是一個二維空間, 在這空間你可以定義位置, 大小, 轉換方式 以及在你的應用程式裡畫出可見的物件, 也可以設定使用者的事件. 在 iOS 和 OS X 裡的應用程式裡面使用座標系統裡的 x 軸和 y 軸(在一般的原點(0.0,0.0)相交)來定位點. 
+一個座標系統是一個二維空間, 在這空間你可以定義位置, 大小, 轉換方式 以及在你的應用程式裡畫出可見的物件, 也可以設定使用者的事件. 在 iOS 和 OS X 裡的應用程式裡面使用座標系統裡的 x 軸和 y 軸(在一般的原點(0.0,0.0)相交)來定位點. 從原點開始. 沿著軸方向代表值增加, 反過來代表負值增加. 你可以在這個座標系統裡面使用一對浮點數來表示一個點, 這對浮點數的座標是依照使用者空間而定義的, 所以像在裝置上的像素單位則不受限制. 在繪製畫面時, 座標系統上的 x 軸和 y 軸的值, 經常是正值.
+
+###Coordinate Systems Can Have Different Drawing Orientations
+The default coordinate system for views in iOS and OS X differ in the orientation of the vertical axis:
+
+1. OS X. The default coordinate system has its origin at the lower left of the drawing area; positive values extend up and to the right from it. You can programmatically “flip” a view’s coordinate system in OS X.
+2. iOS. The default coordinate system has its origin at the upper left of the drawing area, and positive values extend down and to the right from it. You cannot change the default orientation of a view’s coordinate system in iOS—that is, you cannot “flip” it.
+
+在 iOS 和 OS X 中, 畫面裡的預設座標系統的 y 軸值是不一樣的:
+
+1. 在 OS X 中, 預設座標系統裡, 原點是在繪製區域的左上角; 向上延伸和向右延伸是正值. 你可以用程式對一個在視圖的座標系統進行 "翻轉" 的動作.
+2. 在 iOS 中, 預設座標裡, 原點是在繪製區域的左上角, 向下延伸和向右延伸是正值. 你不能改變視圖裡的座標系統的方向, 也就是說, 你不能 "翻轉".
+
+
+###Windows and Views Have Their Own Coordinate Systems
+An application has multiple coordinate systems in play at any time. A window is positioned and sized in screen coordinates, which are defined by the coordinate system for the display. The window itself represents the base coordinate system for all drawing and event handling performed by its views. Each view in the window maintains its own local coordinate system for drawing itself; this coordinate system is defined by a view’s bounds property. A view’s frame property expresses its location and size in the coordinate system of its superview; that same view, in turn, provides the base coordinate system for positioning and sizing its subviews.
+
+
+一個應用程式在任何時候有很多種座標系統在運行. 一個 window 在一個螢幕座標裡, 位置和大小是固定的, 其中為了顯示而被定義成座標系統. 一個 window 
+
+
+Both the AppKit and UIKit frameworks provide methods for converting points and rectangles between the coordinate systems of a view and another view, a view and its window, and (on OS X) the screen and the window. An application locates mouse, tablet, gesture, and multi-touch events in the coordinate system of a window, but views can easily convert these to their local coordinate systems.
+
+You can also map points from one coordinate space to another using a two-dimensional mathematical array known as a transform. Using transforms, you can easily scale, rotate, and translate content in two-dimensional space.
+
