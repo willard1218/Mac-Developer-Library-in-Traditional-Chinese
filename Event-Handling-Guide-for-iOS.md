@@ -242,5 +242,24 @@ You can create a gesture recognizer programmatically by allocating and initializ
 If you create a gesture recognizer programmatically, you need to attach it to a view using the addGestureRecognizer: method. Listing 1-2 creates a single tap gesture recognizer, specifies that one tap is required for the gesture to be recognized, and then attaches the gesture recognizer object to a view. Typically, you create a gesture recognizer in your view controller’s viewDidLoad method, as shown in Listing 1-2.
 
 
+##Motion Events
+
+Users generate motion events when they move, shake, or tilt the device. These motion events are detected by the device hardware, specifically, the accelerometer and the gyroscope.
+
+當使用者移動, 搖, 或傾斜裝置時, 會產生移動事件. 裝置上的硬體會偵測到這些移動事件, 就是加速度和陀螺儀.
+
+The accelerometer is actually made up of three accelerometers, one for each axis—x, y, and z. Each one measures changes in velocity over time along a linear path. Combining all three accelerometers lets you detect device movement in any direction and get the device’s current orientation. Although there are three accelerometers, the remainder of this document refers to them as a single entity. The gyroscope measures the rate of rotation around the three axes.
+
+加速度是由三個維度所組成的, 其中包含 x, y, z 軸. 每一個都測量在線性上隨時間的速度的變化. 結合這三種加速度可以讓你偵測裝置在任何方向的移動, 以及得到裝置現在的方位. 雖然是有三種加速度, 但是在這份文件的後面, 把它們看成一個單獨的實體. 陀螺儀則是測量三個軸的旋轉比率.
+
+All motion events originate from the same hardware. There are several different ways that you can access that hardware data, depending on your app’s needs:
+
+所有的移動事件都是從相同的硬體來的, 下面有幾種不同的方式讓你取得硬體的資料, 取決於你的機器需要哪一種：
+
+- If you need to detect the general orientation of a device, but you don’t need to know the orientation vector, use the UIDevice class. See Getting the Current Device Orientation with UIDevice for more information.
+- If you want your app to respond when a user shakes the device, you can use the UIKit motion-event handling methods to get information from the passed-in UIEvent object. See Detecting Shake-Motion Events with UIEvent for more information.
+- If neither the UIDevice nor the UIEvent classes are sufficient, it’s likely you’ll want to use the Core Motion framework to access the accelerometer, gyroscope, and device motion classes. See Capturing Device Movement with Core Motion for more information.
 
 
+- 如果你需要偵測裝置的方向, 但是你不需要知道方向向量, 可以使用 UIDevice 類別.
+- 如果你的應用程式需要回應使用者搖動裝置的動作, 可以使用 UIKit 的移動事件來
